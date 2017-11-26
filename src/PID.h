@@ -1,6 +1,11 @@
 #ifndef PID_H
 #define PID_H
 
+#include <math.h>
+#include <vector>
+
+using namespace std;
+
 class PID {
 public:
   /*
@@ -9,7 +14,7 @@ public:
   double p_error;
   double i_error;
   double d_error;
-
+  double total_error;
   /*
   * Coefficients
   */ 
@@ -37,10 +42,29 @@ public:
   */
   void UpdateError(double cte);
 
+  double GetControl();
   /*
   * Calculate the total PID error.
   */
   double TotalError();
+};
+
+class twiddle {
+
+public:
+	double error;
+	double best_error;
+	vector<double> parameters;
+	/*
+	* Constructor
+	*/
+	twiddle(vector<double>);
+
+	/*
+	* Destructor.
+	*/
+	virtual ~twiddle();
+
 };
 
 #endif /* PID_H */
