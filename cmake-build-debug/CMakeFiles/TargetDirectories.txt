@@ -1,3 +1,0 @@
-/media/chulongc/Documents/Python/CarND-PID-Control-Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/chulongc/Documents/Python/CarND-PID-Control-Project/cmake-build-debug/CMakeFiles/edit_cache.dir
-/media/chulongc/Documents/Python/CarND-PID-Control-Project/cmake-build-debug/CMakeFiles/pid.dir
