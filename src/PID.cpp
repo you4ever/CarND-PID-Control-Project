@@ -27,16 +27,18 @@ void PID::UpdateError(double cte) {
 	p_error = cte;
 	// Update integral error
 	i_error += cte;
-	// Use l1 error instead of squared-error for simplicity
-	total_error += fabs(cte);
+	// Update total error
+	total_error = Kp*p_error + Kd*d_error + Ki*i_error;
+
 	return;
 }
 
 double PID::GetControl() {
-	return -Kp*p_error - Kd*d_error - Ki*i_error;
+	return -total_error;
 }
 
 double PID::TotalError() {
+
 	return total_error;
 }
 

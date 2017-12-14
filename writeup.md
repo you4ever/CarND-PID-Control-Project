@@ -49,7 +49,7 @@ For simplicity only the controller to steering angle is controlled by a PID cont
 ### Implementation speed control 
 To control the speed, I used a heuristic controller based on well-defined logics as elaborated in the following:
 * When the speed is less than some target speed ``vt`` throttle is set to 0.9. This sets the lowest speed for the car.
-* When speed is greater than 60mph and CTE is less than 0.85. The throttle is set to 0. So that the car will coast at the top speed of 60mph if error is small. If 
+* When speed is greater than 60mph and CTE is less than 0.80. The throttle is set to 0. So that the car will coast at the top speed of 45mph if error is small. If 
 * Under any case the brake is applied when CTE is greater than 0.85. 
 For detailed implementation, see ``main.app:74-88``
 
@@ -65,13 +65,13 @@ Manual twiddling with some intuition is employed in this project to find the fin
   2.2. Test drive
   2.3. Go to to 2.1 until no improvement on oscillation behavior is noticable 
  3. Find the ``kd``: 
-  3.1 Increase ``ki`` by 0.00001
+  3.1 Increase ``ki`` by 0.000001
   3.2 Test drive
   3.3 Go to 3.1 until the local minima in accumulated absolute error is found. 
 
-One may iterate Step 1)-3) a few times to increase the target speet ``vt``. The final values for gains are choosen as ``kp = 0.2, ki = 0.00001, kd = 25.0``. Since the simulator does not have the problem of systematic bias so teh ``ki`` gain is set to very small number.
+One may iterate Step 1)-3) a few times to increase the target speet ``vt``. The final values for gains are choosen as ``kp = 0.15, ki = 0.000001, kd = 15.0``. Since the simulator does not have the problem of systematic bias so teh ``ki`` gain is set to very small number.
 
 
 ## Simualtion result
 
-After tuning the gain of PID controller, the PID is able to drive the car safely and smoothly by tracking the waypoints. The target speed is set to 60 mph and is sustainable most of the time. 
+After tuning the gain of PID controller, the PID is able to drive the car safely and smoothly by tracking the waypoints. The target speed is set to 45 mph and is sustainable most of the time. 

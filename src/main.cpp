@@ -35,9 +35,7 @@ int main()
 
   PID pid;
   // TODO: Initialize the pid variable.
-  //pid.Init(0.15, 0.00004, 15.0);
-  //pid.Init(0.134611, 0.000270736, 5.05349);
-  pid.Init(0.1, 0.001, 2.8);
+  pid.Init(0.15, 0.000001, 15);
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -71,25 +69,23 @@ int main()
 			  steer_value = -1;
 		  }
 
-		  if (speed < 25.0) {
-			  throttle_value = 0.9f;
-		  }
-		  else if (speed > 60.0 && fabs(cte) >= 0.85f) {
-			  throttle_value = -0.9f;
-		  }
-		  else if (speed > 60.0  && fabs(cte) < 0.85f) {
-			  throttle_value = 0.0;
-		  }
-		  else if (speed <= 60.0  && fabs(cte) < 0.85f) {
-			  throttle_value = 0.8f;
-		  }
-		  else if (speed <= 60.0  && fabs(cte) >= 0.85f) {
-			  throttle_value = -1.0f;
-		  }
+		  if (fabs(cte) < 0.80f) {
+			  if (speed < 45.0) {
+				  throttle_value = 0.9;
+			  }
+			  else {
+				  throttle_value = 0.0;
+			  }
+		  } 
 		  else {
-			  throttle_value = 0.8f;
+			  if (speed < 20.0) {
+				  throttle_value = 0.4;
+			  } 
+			  else {
+				  throttle_value = -1.0;
+			  }
+			  
 		  }
-
 		  cout << "Speed = " << speed << endl;
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
